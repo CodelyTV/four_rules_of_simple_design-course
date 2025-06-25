@@ -1,4 +1,4 @@
-package tv.codely.examples.post.application;
+package tv.codely.examples.post.application.create;
 
 public class PostCreatorResponse {
     private final String postId;

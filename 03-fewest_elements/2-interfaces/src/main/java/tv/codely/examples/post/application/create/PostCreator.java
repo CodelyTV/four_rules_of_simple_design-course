@@ -1,4 +1,4 @@
-package tv.codely.examples.post.application;
+package tv.codely.examples.post.application.create;
 
 import tv.codely.examples.post.domain.PostFactoryInterface;
 import tv.codely.examples.post.domain.PostInterface;

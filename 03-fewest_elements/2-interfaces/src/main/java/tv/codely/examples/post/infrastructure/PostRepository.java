@@ -11,16 +11,7 @@ public class PostRepository implements PostRepositoryInterface {
 
     @Override
     public void save(PostInterface post) {
-        posts.put(post.getId(), post);
+        posts.put(post.id(), post);
     }
 
-    @Override
-    public PostInterface findById(String id) {
-        return posts.get(id);
-    }
-
-    @Override
-    public void delete(String id) {
-        posts.remove(id);
-    }
 }

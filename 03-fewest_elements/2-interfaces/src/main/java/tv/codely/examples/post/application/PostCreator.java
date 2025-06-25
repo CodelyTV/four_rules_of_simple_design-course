@@ -16,14 +16,13 @@ public class PostCreator implements PostCreatorInterface {
     @Override
     public PostCreatorResponse execute(PostCreatorRequest request) {
         PostInterface post = factory.create(
-            request.getId(),
-            request.getTitle(),
-            request.getContent(),
-            request.getAuthorId()
+            request.id(),
+            request.title(),
+            request.content()
         );
-        
+
         repository.save(post);
-        
-        return new PostCreatorResponse(post.getId(), true);
+
+        return new PostCreatorResponse(post.id(), true);
     }
 }

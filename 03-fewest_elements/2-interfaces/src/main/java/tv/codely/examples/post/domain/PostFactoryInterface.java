@@ -1,5 +1,5 @@
 package tv.codely.examples.post.domain;
 
 public interface PostFactoryInterface {
-    PostInterface create(String id, String title, String content, String authorId);
+    PostInterface create(String id, String title, String content);
 }

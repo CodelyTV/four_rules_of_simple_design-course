@@ -2,13 +2,21 @@ import { User } from "../../../src/users/domain/User";
 import { UserRepository } from "../../../src/users/domain/UserRepository";
 
 export class MockUserRepository implements UserRepository {
-	private readonly users: Map<string, User> = new Map();
+	private readonly mockGet = jest.fn();
 
 	async get(id: string): Promise<User | null> {
-		return this.users.get(id) ?? null;
+		expect(this.mockGet).toHaveBeenCalledWith(id);
+
+		return this.mockGet() as Promise<User | null>;
 	}
 
-	addUser(user: User): void {
-		this.users.set(user.id, user);
+	shouldGet(user: User): void {
+		this.mockGet(user.id);
+		this.mockGet.mockReturnValueOnce(user);
+	}
+
+	shouldGetAndReturnNull(id: string): void {
+		this.mockGet(id);
+		this.mockGet.mockReturnValueOnce(null);
 	}
 }

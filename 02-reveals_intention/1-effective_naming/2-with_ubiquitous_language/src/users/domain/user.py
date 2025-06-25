@@ -8,11 +8,11 @@ class User:
     name: str
     status: int
 
-    def is_blocked(self) -> bool:
+    def is_banned(self) -> bool:
         return self.status == 1
 
-    def block(self) -> None:
+    def ban(self) -> None:
         self.status = 1
 
-    def unblock(self) -> None:
+    def unban(self) -> None:
         self.status = 0

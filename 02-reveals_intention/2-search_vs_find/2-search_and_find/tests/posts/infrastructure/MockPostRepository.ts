@@ -2,21 +2,21 @@ import { Post } from "../../../src/posts/domain/Post";
 import { PostRepository } from "../../../src/posts/domain/PostRepository";
 
 export class MockPostRepository implements PostRepository {
-	private readonly mockGet = jest.fn();
+	private readonly mockSearch = jest.fn();
 
-	async get(id: string): Promise<Post | null> {
-		expect(this.mockGet).toHaveBeenCalledWith(id);
+	async search(id: string): Promise<Post | null> {
+		expect(this.mockSearch).toHaveBeenCalledWith(id);
 
-		return this.mockGet() as Promise<Post | null>;
+		return this.mockSearch() as Promise<Post | null>;
 	}
 
-	shouldGet(post: Post): void {
-		this.mockGet(post.id);
-		this.mockGet.mockReturnValueOnce(post);
+	shouldSearch(post: Post): void {
+		this.mockSearch(post.id);
+		this.mockSearch.mockReturnValueOnce(post);
 	}
 
-	shouldGetAndReturnNull(id: string): void {
-		this.mockGet(id);
-		this.mockGet.mockReturnValueOnce(null);
+	shouldSearchAndReturnNull(id: string): void {
+		this.mockSearch(id);
+		this.mockSearch.mockReturnValueOnce(null);
 	}
 }

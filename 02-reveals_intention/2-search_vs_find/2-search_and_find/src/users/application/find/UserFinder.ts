@@ -2,11 +2,11 @@ import { User } from "../../domain/User";
 import { UserDoesNotExistError } from "../../domain/UserDoesNotExistError";
 import { UserRepository } from "../../domain/UserRepository";
 
-export class UserGetter {
+export class UserFinder {
 	constructor(private readonly repository: UserRepository) {}
 
-	async get(id: string): Promise<User> {
-		const user = await this.repository.get(id);
+	async find(id: string): Promise<User> {
+		const user = await this.repository.search(id);
 
 		if (user === null) {
 			throw new UserDoesNotExistError(id);

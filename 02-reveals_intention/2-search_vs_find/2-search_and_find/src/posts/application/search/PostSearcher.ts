@@ -1,10 +1,10 @@
 import { Post } from "../../domain/Post";
 import { PostRepository } from "../../domain/PostRepository";
 
-export class PostGetter {
+export class PostSearcher {
 	constructor(private readonly repository: PostRepository) {}
 
-	async get(id: string): Promise<Post | null> {
-		return await this.repository.get(id);
+	async search(id: string): Promise<Post | null> {
+		return await this.repository.search(id);
 	}
 }

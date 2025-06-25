@@ -1,18 +1,18 @@
-import { UserGetter } from "../../../../src/users/application/get/UserGetter";
+import { UserFinder } from "../../../../src/users/application/find/UserFinder";
 import { User } from "../../../../src/users/domain/User";
 import { UserDoesNotExistError } from "../../../../src/users/domain/UserDoesNotExistError";
 import { MockUserRepository } from "../../infrastructure/MockUserRepository";
 
-describe("UserGetter", () => {
+describe("UserFinder", () => {
 	const repository = new MockUserRepository();
-	const userGetter = new UserGetter(repository);
+	const userFinder = new UserFinder(repository);
 
 	it("should return user when user exists", async () => {
 		const user = new User("123", "test@example.com");
 
-		repository.shouldGet(user);
+		repository.shouldSearch(user);
 
-		const result = await userGetter.get("123");
+		const result = await userFinder.find("123");
 
 		expect(result).toBe(user);
 	});
@@ -20,8 +20,10 @@ describe("UserGetter", () => {
 	it("should throw UserDoesNotExistError when user does not exist", async () => {
 		const id = "non-existent-id";
 
-		repository.shouldGetAndReturnNull(id);
+		repository.shouldSearchAndReturnNull(id);
 
-		await expect(userGetter.get(id)).rejects.toThrow(UserDoesNotExistError);
+		await expect(userFinder.find(id)).rejects.toThrow(
+			UserDoesNotExistError,
+		);
 	});
 });

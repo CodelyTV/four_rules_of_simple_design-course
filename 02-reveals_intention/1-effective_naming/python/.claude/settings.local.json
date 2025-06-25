@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(python -m pytest tests/users/application/block/test_block_user.py -v)",
+      "Bash(python -m unittest:*)"
+    ],
+    "deny": []
+  }
+}

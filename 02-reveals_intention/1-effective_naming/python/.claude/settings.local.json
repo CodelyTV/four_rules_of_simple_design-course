@@ -3,7 +3,8 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(python -m pytest tests/users/application/block/test_block_user.py -v)",
-      "Bash(python -m unittest:*)"
+      "Bash(python -m unittest:*)",
+      "Bash(make test:*)"
     ],
     "deny": []
   }

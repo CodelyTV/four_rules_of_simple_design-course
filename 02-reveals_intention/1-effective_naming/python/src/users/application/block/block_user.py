@@ -1,18 +1,6 @@
 import uuid
-from abc import ABC, abstractmethod
-from typing import Optional
 
-from src.users.domain.user import User
-
-
-class UserRepository(ABC):
-	@abstractmethod
-	def find_by_id(self, user_id: uuid.UUID) -> Optional[User]:
-		pass
-
-	@abstractmethod
-	def save(self, user: User) -> None:
-		pass
+from src.users.domain.user_repository import UserRepository
 
 
 class UserNotFoundError(Exception):
@@ -32,7 +20,7 @@ class BlockUser:
 		self._user_repository = user_repository
 
 	def execute(self, user_id: uuid.UUID) -> None:
-		user = self._user_repository.find_by_id(user_id)
+		user = self._user_repository.search(user_id)
 
 		if user is None:
 			raise UserNotFoundError(user_id)

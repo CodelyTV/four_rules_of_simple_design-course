@@ -1,25 +1,13 @@
 import unittest
 import uuid
-from typing import Dict, Optional
 
 from src.users.application.block.block_user import (
     BlockUser,
     UserAlreadyBlockedError,
     UserNotFoundError,
-    UserRepository,
 )
 from src.users.domain.user import User
-
-
-class InMemoryUserRepository(UserRepository):
-    def __init__(self):
-        self._users: Dict[uuid.UUID, User] = {}
-
-    def find_by_id(self, user_id: uuid.UUID) -> Optional[User]:
-        return self._users.get(user_id)
-
-    def save(self, user: User) -> None:
-        self._users[user.id] = user
+from tests.users.infrastructure.in_memory_user_repository import InMemoryUserRepository
 
 
 class TestBlockUser(unittest.TestCase):
@@ -34,7 +22,7 @@ class TestBlockUser(unittest.TestCase):
 
         self.block_user.execute(user_id)
 
-        saved_user = self.repository.find_by_id(user_id)
+        saved_user = self.repository.search(user_id)
         self.assertTrue(saved_user.is_blocked())
         self.assertEqual(saved_user.status, 1)
 

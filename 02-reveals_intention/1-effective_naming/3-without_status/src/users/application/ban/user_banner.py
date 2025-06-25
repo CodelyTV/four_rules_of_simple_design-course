@@ -15,7 +15,7 @@ class UserBanner:
 		if user is None:
 			raise UserNotFoundError(user_id)
 
-		if user.is_banned():
+		if user.is_banned:
 			raise UserAlreadyBannedError(user_id)
 
 		user.ban()

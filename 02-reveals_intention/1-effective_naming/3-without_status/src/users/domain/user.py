@@ -6,13 +6,10 @@ from dataclasses import dataclass
 class User:
     id: uuid.UUID
     name: str
-    status: int
-
-    def is_banned(self) -> bool:
-        return self.status == 1
+    is_banned: bool = False
 
     def ban(self) -> None:
-        self.status = 1
+        self.is_banned = True
 
     def unban(self) -> None:
-        self.status = 0
+        self.is_banned = False

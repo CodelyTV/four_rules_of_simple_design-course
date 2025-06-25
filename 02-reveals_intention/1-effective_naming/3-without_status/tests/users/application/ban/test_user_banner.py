@@ -16,15 +16,14 @@ class TestUserBanner(unittest.TestCase):
 
     def test_ban_user_successfully(self):
         user_id = uuid.uuid4()
-        user = User(id=user_id, name="Javier", status=0)
+        user = User(id=user_id, name="Javier", is_banned=False)
 
         self.repository.search.return_value = copy.deepcopy(user)
 
         self.user_banner.ban(user_id)
 
         saved_user = self.repository.save.call_args[0][0]
-        self.assertTrue(saved_user.is_banned())
-        self.assertEqual(saved_user.status, 1)
+        self.assertTrue(saved_user.is_banned)
 
     def test_raises_error_when_user_not_found(self):
         non_existent_user_id = uuid.uuid4()
@@ -38,7 +37,7 @@ class TestUserBanner(unittest.TestCase):
 
     def test_raises_error_when_user_already_banned(self):
         user_id = uuid.uuid4()
-        already_banned_user = User(id=user_id, name="Javier", status=1)
+        already_banned_user = User(id=user_id, name="Javier", is_banned=True)
 
         self.repository.search.return_value = already_banned_user
 

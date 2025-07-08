@@ -5,65 +5,65 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository {
-    Optional<User> findById(UUID id);
+    Optional<User> searchById(UUID id);
 
-    Optional<User> findByName(String name);
+    Optional<User> searchByName(String name);
 
-    Optional<User> findByEmail(String email);
+    Optional<User> searchByEmail(String email);
 
-    List<User> findByNameAndSurname(String name, String surname);
+    List<User> searchByNameAndSurname(String name, String surname);
 
-    List<User> findByNameOrSurname(String name, String surname);
+    List<User> searchByNameOrSurname(String name, String surname);
 
-    List<User> findByNameContaining(String nameFragment);
+    List<User> searchByNameContaining(String nameFragment);
 
-    List<User> findBySurnameContaining(String surnameFragment);
+    List<User> searchBySurnameContaining(String surnameFragment);
 
-    List<User> findByEmailContaining(String emailFragment);
+    List<User> searchByEmailContaining(String emailFragment);
 
-    List<User> findByNameStartingWith(String prefix);
+    List<User> searchByNameStartingWith(String prefix);
 
-    List<User> findBySurnameStartingWith(String prefix);
+    List<User> searchBySurnameStartingWith(String prefix);
 
-    List<User> findByNameEndingWith(String suffix);
+    List<User> searchByNameEndingWith(String suffix);
 
-    List<User> findBySurnameEndingWith(String suffix);
+    List<User> searchBySurnameEndingWith(String suffix);
 
-    List<User> findByAgeGreaterThan(int age);
+    List<User> searchByAgeGreaterThan(int age);
 
-    List<User> findByAgeLessThan(int age);
+    List<User> searchByAgeLessThan(int age);
 
-    List<User> findByAgeBetween(int minAge, int maxAge);
+    List<User> searchByAgeBetween(int minAge, int maxAge);
 
-    List<User> findByNameAndEmail(String name, String email);
+    List<User> searchByNameAndEmail(String name, String email);
 
-    List<User> findByNameAndSurnameAndEmail(String name, String surname, String email);
+    List<User> searchByNameAndSurnameAndEmail(String name, String surname, String email);
 
-    List<User> findByNameOrEmail(String name, String email);
+    List<User> searchByNameOrEmail(String name, String email);
 
-    List<User> findByActiveTrue();
+    List<User> searchByActiveTrue();
 
-    List<User> findByActiveFalse();
+    List<User> searchByActiveFalse();
 
-    List<User> findByNameAndActiveTrue(String name);
+    List<User> searchByNameAndActiveTrue(String name);
 
-    List<User> findByNameAndActiveFalse(String name);
+    List<User> searchByNameAndActiveFalse(String name);
 
-    List<User> findByCountry(String country);
+    List<User> searchByCountry(String country);
 
-    List<User> findByCity(String city);
+    List<User> searchByCity(String city);
 
-    List<User> findByCountryAndCity(String country, String city);
+    List<User> searchByCountryAndCity(String country, String city);
 
-    List<User> findByNameOrderByAgeAsc(String name);
+    List<User> searchByNameOrderByAgeAsc(String name);
 
-    List<User> findByNameOrderByAgeDesc(String name);
+    List<User> searchByNameOrderByAgeDesc(String name);
 
-    List<User> findBySurnameOrderByNameAsc(String surname);
+    List<User> searchBySurnameOrderByNameAsc(String surname);
 
-    List<User> findBySurnameOrderByNameDesc(String surname);
+    List<User> searchBySurnameOrderByNameDesc(String surname);
 
-    List<User> findAll();
+    List<User> searchAll();
 
     User save(User user);
 

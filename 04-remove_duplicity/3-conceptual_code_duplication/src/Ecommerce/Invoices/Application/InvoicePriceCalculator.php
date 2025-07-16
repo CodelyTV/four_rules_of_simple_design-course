@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CodelyTv\Ecommerce\Invoices\Application;
 
 use CodelyTv\Ecommerce\Invoices\domain\InvoiceLine;

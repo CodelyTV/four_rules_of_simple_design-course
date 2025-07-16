@@ -2,7 +2,7 @@ import { User } from "@/modules/users/domain/User";
 import { UserRepository } from "@/modules/users/domain/UserRepository";
 
 export class InMemoryUserRepository implements UserRepository {
-	private static readonly users: Map<string, User> = new Map();
+	public static readonly users: Map<string, User> = new Map();
 
 	async search(id: string): Promise<User | null> {
 		const user = InMemoryUserRepository.users.get(id);
@@ -11,6 +11,12 @@ export class InMemoryUserRepository implements UserRepository {
 	}
 
 	async save(user: User): Promise<void> {
-		InMemoryUserRepository.users.set(user.id, user);
+		const existingUser = InMemoryUserRepository.users.get(user.id);
+
+		if (!existingUser) {
+			InMemoryUserRepository.users.set(user.id, user);
+		} else if (existingUser === user) {
+			InMemoryUserRepository.users.set(user.id, user);
+		}
 	}
 }

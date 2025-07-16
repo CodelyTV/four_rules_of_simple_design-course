@@ -4,6 +4,10 @@ import { UserRepository } from "@/modules/users/domain/UserRepository";
 export class MockUserRepository implements UserRepository {
 	private readonly mockSearch = jest.fn();
 
+	async save(_user: User): Promise<void> {
+		throw new Error("Method not implemented.");
+	}
+
 	async search(id: string): Promise<User | null> {
 		expect(this.mockSearch).toHaveBeenCalledWith(id);
 

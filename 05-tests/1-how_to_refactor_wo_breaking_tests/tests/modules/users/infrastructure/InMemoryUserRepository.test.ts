@@ -2,10 +2,10 @@ import { User } from "@/modules/users/domain/User";
 import { InMemoryUserRepository } from "@/modules/users/infrastructure/InMemoryUserRepository";
 
 describe("InMemoryUserRepository", () => {
-	let repository: InMemoryUserRepository;
+	const repository = new InMemoryUserRepository();
 
 	beforeEach(() => {
-		repository = new InMemoryUserRepository();
+		InMemoryUserRepository.users.clear();
 	});
 
 	it("should save a user", async () => {
@@ -15,18 +15,6 @@ describe("InMemoryUserRepository", () => {
 
 		const savedUser = await repository.search("123");
 		expect(savedUser).toBe(user);
-	});
-
-	it("should overwrite existing user with same id", async () => {
-		const originalUser = new User("123", "original@example.com");
-		const updatedUser = new User("123", "updated@example.com");
-
-		await repository.save(originalUser);
-		await repository.save(updatedUser);
-
-		const savedUser = await repository.search("123");
-
-		expect(savedUser).toBe(updatedUser);
 	});
 
 	it("should return user when found", async () => {

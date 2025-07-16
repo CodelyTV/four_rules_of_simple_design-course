@@ -17,7 +17,7 @@ export async function GET(
 	try {
 		const user = await userFinder.find(id);
 
-		return NextResponse.json({ user });
+		return NextResponse.json({ ...user });
 	} catch (error) {
 		if (error instanceof UserDoesNotExistError) {
 			return NextResponse.json({ error: error.message }, { status: 404 });

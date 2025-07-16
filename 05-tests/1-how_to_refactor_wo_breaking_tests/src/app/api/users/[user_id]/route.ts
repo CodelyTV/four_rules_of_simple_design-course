@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { UserFinder } from "@/modules/users/application/find/UserFinder";
 import { UserDoesNotExistError } from "@/modules/users/domain/UserDoesNotExistError";
-import { InMemoryUserRepository } from "@/modules/users/infrastructure/persistence/InMemoryUserRepository";
+import { InMemoryUserRepository } from "@/modules/users/infrastructure/InMemoryUserRepository";
 
 const userRepository = new InMemoryUserRepository();
 const userFinder = new UserFinder(userRepository);

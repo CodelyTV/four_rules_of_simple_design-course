@@ -1,5 +1,5 @@
-import { User } from "../../domain/User";
-import { UserRepository } from "../../domain/UserRepository";
+import { User } from "@/modules/users/domain/User";
+import { UserRepository } from "@/modules/users/domain/UserRepository";
 
 export class InMemoryUserRepository implements UserRepository {
 	private static readonly users: Map<string, User> = new Map();

@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 import { GET } from "@/app/api/users/[user_id]/route";
 import { User } from "@/modules/users/domain/User";
 import { UserRepository } from "@/modules/users/domain/UserRepository";
-import { InMemoryUserRepository } from "@/modules/users/infrastructure/persistence/InMemoryUserRepository";
+import { InMemoryUserRepository } from "@/modules/users/infrastructure/InMemoryUserRepository";
 
 describe("GET /api/users/[user_id]", () => {
 	let repository: UserRepository;

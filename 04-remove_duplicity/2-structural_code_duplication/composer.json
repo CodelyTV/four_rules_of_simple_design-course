@@ -26,7 +26,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "CodelyTv\\Tests\\": "tests/"
+		"Code lyTv\\Tests\\": "tests/"
     }
   },
   "minimum-stability": "stable",

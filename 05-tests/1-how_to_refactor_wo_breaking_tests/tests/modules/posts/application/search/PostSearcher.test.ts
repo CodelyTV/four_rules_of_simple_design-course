@@ -1,6 +1,6 @@
-import { PostSearcher } from "../../../../src/posts/application/search/PostSearcher";
-import { Post } from "../../../../src/posts/domain/Post";
 import { MockPostRepository } from "../../infrastructure/MockPostRepository";
+import {PostSearcher} from "@/modules/posts/application/search/PostSearcher";
+import {Post} from "@/modules/posts/domain/Post";
 
 describe("PostSearcher", () => {
 	const repository = new MockPostRepository();

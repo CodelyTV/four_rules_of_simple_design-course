@@ -1,5 +1,5 @@
-import { User } from "../../../src/users/domain/User";
-import { UserRepository } from "../../../src/users/domain/UserRepository";
+import { User } from "@/modules/users/domain/User";
+import { UserRepository } from "@/modules/users/domain/UserRepository";
 
 export class MockUserRepository implements UserRepository {
 	private readonly mockSearch = jest.fn();

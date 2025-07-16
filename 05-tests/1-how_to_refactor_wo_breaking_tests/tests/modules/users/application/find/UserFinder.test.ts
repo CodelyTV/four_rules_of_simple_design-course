@@ -1,6 +1,7 @@
-import { UserFinder } from "../../../../src/users/application/find/UserFinder";
-import { User } from "../../../../src/users/domain/User";
-import { UserDoesNotExistError } from "../../../../src/users/domain/UserDoesNotExistError";
+import { UserFinder } from "@/modules/users/application/find/UserFinder";
+import { User } from "@/modules/users/domain/User";
+import { UserDoesNotExistError } from "@/modules/users/domain/UserDoesNotExistError";
+
 import { MockUserRepository } from "../../infrastructure/MockUserRepository";
 
 describe("UserFinder", () => {

@@ -1,5 +1,5 @@
-import { Post } from "../../../src/posts/domain/Post";
-import { PostRepository } from "../../../src/posts/domain/PostRepository";
+import { Post } from "@/modules/posts/domain/Post";
+import { PostRepository } from "@/modules/posts/domain/PostRepository";
 
 export class MockPostRepository implements PostRepository {
 	private readonly mockSearch = jest.fn();

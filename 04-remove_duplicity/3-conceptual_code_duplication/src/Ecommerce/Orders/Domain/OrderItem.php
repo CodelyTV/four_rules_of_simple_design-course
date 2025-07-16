@@ -1,6 +1,6 @@
 <?php
 
-namespace CodelyTv\Orders\Domain;
+namespace CodelyTv\Ecommerce\Orders\Domain;
 
 final readonly class OrderItem
 {

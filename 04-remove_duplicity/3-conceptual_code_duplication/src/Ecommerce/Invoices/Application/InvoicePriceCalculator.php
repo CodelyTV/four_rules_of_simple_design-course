@@ -1,8 +1,8 @@
 <?php
 
-namespace CodelyTv\Invoices\Application;
+namespace CodelyTv\Ecommerce\Invoices\Application;
 
-use CodelyTv\invoices\domain\InvoiceLine;
+use CodelyTv\Ecommerce\Invoices\domain\InvoiceLine;
 
 final readonly class InvoicePriceCalculator
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace CodelyTv\Invoices\Domain;
+namespace CodelyTv\Ecommerce\Invoices\Domain;
 
 final readonly class InvoiceLine
 {

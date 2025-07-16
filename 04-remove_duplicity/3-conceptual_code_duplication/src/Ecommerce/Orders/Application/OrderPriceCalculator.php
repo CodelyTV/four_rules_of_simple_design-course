@@ -1,8 +1,8 @@
 <?php
 
-namespace CodelyTv\Orders\Application;
+namespace CodelyTv\Ecommerce\Orders\Application;
 
-use CodelyTv\Orders\Domain\OrderItem;
+use CodelyTv\Ecommerce\Orders\Domain\OrderItem;
 
 final readonly class OrderPriceCalculator
 {

@@ -41,6 +41,7 @@ final class UsersControllerTest extends TestCase
 	{
 		$validUser = [
 			'username' => 'validAdminUsername',
+			'email' => 'admin@mail.com',
 			'adminCode' => 'ADM001',
 		];
 
@@ -48,14 +49,14 @@ final class UsersControllerTest extends TestCase
 		$adminRepository = $this->adminRepository();
 		$controller = new UsersController($userRepository, $adminRepository);
 
-		$admin = new Admin($validUser['username'], $validUser['adminCode']);
+		$admin = new Admin($validUser['username'], $validUser['email'], $validUser['adminCode']);
 
 		$adminRepository->expects($this->once())
 			->method('save')
 			->with($admin);
 
 
-		$controller->adminsPost($validUser['username'], $validUser['adminCode']);
+		$controller->adminsPost($validUser['username'], $validUser['email'], $validUser['adminCode']);
 	}
 
 	#[Test] public function itShouldThrowExceptionWhenUserUsernameIsTooShort(): void
@@ -100,6 +101,7 @@ final class UsersControllerTest extends TestCase
 	{
 		$invalidAdmin = [
 			'username' => 'ab',
+			'email' => 'admin@mail.com',
 			'adminCode' => 'ADM001',
 		];
 
@@ -110,13 +112,14 @@ final class UsersControllerTest extends TestCase
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Username must be at least 3 characters long');
 
-		$controller->adminsPost($invalidAdmin['username'], $invalidAdmin['adminCode']);
+		$controller->adminsPost($invalidAdmin['username'], $invalidAdmin['email'], $invalidAdmin['adminCode']);
 	}
 
 	#[Test] public function itShouldThrowExceptionWhenAdminUsernameIsTooLong(): void
 	{
 		$invalidAdmin = [
 			'username' => 'thisusernameiswaytoolongforthevalidation',
+			'email' => 'admin@mail.com',
 			'adminCode' => 'ADM001',
 		];
 
@@ -127,7 +130,44 @@ final class UsersControllerTest extends TestCase
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Username must be less than 20 characters long');
 
-		$controller->adminsPost($invalidAdmin['username'], $invalidAdmin['adminCode']);
+		$controller->adminsPost($invalidAdmin['username'], $invalidAdmin['email'], $invalidAdmin['adminCode']);
+	}
+
+	#[Test] public function itShouldThrowExceptionWhenUserEmailIsInvalid(): void
+	{
+		$invalidUser = [
+			'username' => 'validuser',
+			'email' => 'invalid-email',
+			'name' => 'Javier',
+			'surname' => 'Ferrer',
+		];
+
+		$userRepository = $this->userRepository();
+		$adminRepository = $this->adminRepository();
+		$controller = new UsersController($userRepository, $adminRepository);
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid email format');
+
+		$controller->usersPost($invalidUser['username'], $invalidUser['email'], $invalidUser['name'], $invalidUser['surname']);
+	}
+
+	#[Test] public function itShouldThrowExceptionWhenAdminEmailIsInvalid(): void
+	{
+		$invalidAdmin = [
+			'username' => 'validadmin',
+			'email' => 'invalid-email',
+			'adminCode' => 'ADM001',
+		];
+
+		$userRepository = $this->userRepository();
+		$adminRepository = $this->adminRepository();
+		$controller = new UsersController($userRepository, $adminRepository);
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid email format');
+
+		$controller->adminsPost($invalidAdmin['username'], $invalidAdmin['email'], $invalidAdmin['adminCode']);
 	}
 
 	private function userRepository(): MockObject | UserRepository

@@ -9,7 +9,8 @@ use function strlen;
 
 final readonly class Admin
 {
-	public function __construct(private string $username, private string $email, private string $code) {
+	public function __construct(private string $username, private string $email, private string $code)
+	{
 		$usernameLength = strlen($username);
 
 		if ($usernameLength < 3) {
@@ -20,5 +21,4 @@ final readonly class Admin
 			throw new InvalidArgumentException('Username must be less than 20 characters long');
 		}
 	}
-
 }

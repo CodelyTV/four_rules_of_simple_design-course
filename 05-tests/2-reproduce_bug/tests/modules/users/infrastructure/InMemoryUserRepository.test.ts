@@ -18,7 +18,8 @@ describe("InMemoryUserRepository", () => {
 	});
 
 	it("should upsert a user", async () => {
-		const originalUser = new User("123", "original@example.com");
+		const userId = "123";
+		const originalUser = new User(userId, "original@example.com");
 		const updatedUser = new User("123", "updated@example.com");
 
 		await repository.save(originalUser);

@@ -3,9 +3,12 @@ import { UserRepository } from "@/modules/users/domain/UserRepository";
 
 export class MockUserRepository implements UserRepository {
 	private readonly mockSearch = jest.fn();
+	private readonly mockSave = jest.fn();
 
-	async save(_user: User): Promise<void> {
-		throw new Error("Method not implemented.");
+	async save(user: User): Promise<void> {
+		expect(this.mockSave).toHaveBeenCalledWith(user);
+
+		return this.mockSave() as Promise<void>;
 	}
 
 	async search(id: string): Promise<User | null> {
@@ -22,5 +25,10 @@ export class MockUserRepository implements UserRepository {
 	shouldSearchAndReturnNull(id: string): void {
 		this.mockSearch(id);
 		this.mockSearch.mockReturnValueOnce(null);
+	}
+
+	shouldSave(user: User): void {
+		this.mockSave(user);
+		this.mockSave.mockReturnValueOnce(Promise.resolve());
 	}
 }

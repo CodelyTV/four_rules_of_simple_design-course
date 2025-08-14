@@ -22,8 +22,12 @@ export class MockUserRepository implements UserRepository {
 		return this.mockSearchByEmail(email) as Promise<User | null>;
 	}
 
-	shouldSave(user: User): void {
-		this.mockSave(user);
+	shouldSave(user?: User): void {
+		if (user) {
+			this.mockSave(user);
+		} else {
+			this.mockSave.mockReturnValueOnce(Promise.resolve());
+		}
 	}
 
 	shouldSearch(user: User): void {

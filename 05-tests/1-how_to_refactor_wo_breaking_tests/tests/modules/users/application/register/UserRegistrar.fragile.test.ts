@@ -12,15 +12,12 @@ import {
 describe("UserRegistrar - FRAGILE TESTS", () => {
 	const repository = new MockUserRepository();
 	const userRegistrar = new UserRegistrar(repository);
-	const ensureUserSpy = jest
-		.spyOn(userRegistrar as any, "ensureUserDoesNotAlreadyExists")
-		.mockResolvedValue(undefined);
-
-	afterEach(() => {
-		ensureUserSpy.mockRestore();
-	});
 
 	it("should call ensureUserDoesNotAlreadyExists and save user when registering", async () => {
+		const ensureUserSpy = jest
+			.spyOn(userRegistrar as any, "ensureUserDoesNotAlreadyExists")
+			.mockResolvedValue(undefined);
+
 		const user = new User("123", "test@example.com");
 
 		repository.shouldSave(user);

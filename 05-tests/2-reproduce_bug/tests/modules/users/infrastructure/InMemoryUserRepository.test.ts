@@ -20,12 +20,12 @@ describe("InMemoryUserRepository", () => {
 	it("should upsert a user", async () => {
 		const userId = "123";
 		const originalUser = new User(userId, "original@example.com");
-		const updatedUser = new User("123", "updated@example.com");
+		const updatedUser = new User(userId, "updated@example.com");
 
 		await repository.save(originalUser);
 		await repository.save(updatedUser);
 
-		const savedUser = await repository.search("123");
+		const savedUser = await repository.search(userId);
 
 		expect(savedUser).toBe(updatedUser);
 	});

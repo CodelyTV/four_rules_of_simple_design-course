@@ -2,12 +2,13 @@ import { User } from "@/modules/users/domain/User";
 import { UserRepository } from "@/modules/users/domain/UserRepository";
 
 export class MockUserRepository implements UserRepository {
+	private readonly mockSave = jest.fn();
 	private readonly mockSearch = jest.fn();
 	private readonly mockSearchByEmail = jest.fn();
-	private readonly mockSave = jest.fn();
 
 	async save(user: User): Promise<void> {
-		this.mockSave(user);
+		expect(this.mockSave).toHaveBeenCalledWith(user);
+
 		return Promise.resolve();
 	}
 
@@ -21,6 +22,10 @@ export class MockUserRepository implements UserRepository {
 		return this.mockSearchByEmail(email) as Promise<User | null>;
 	}
 
+	shouldSave(user: User): void {
+		this.mockSave(user);
+	}
+
 	shouldSearch(user: User): void {
 		this.mockSearch(user.id);
 		this.mockSearch.mockReturnValueOnce(user);
@@ -32,18 +37,7 @@ export class MockUserRepository implements UserRepository {
 	}
 
 	shouldSearchByEmailAndReturn(email: string, user: User | null): void {
+		this.mockSearchByEmail(email);
 		this.mockSearchByEmail.mockReturnValueOnce(user);
-	}
-
-	shouldSave(): void {
-		this.mockSave.mockReturnValueOnce(Promise.resolve());
-	}
-
-	getSaveMock(): jest.Mock {
-		return this.mockSave;
-	}
-
-	getSearchByEmailMock(): jest.Mock {
-		return this.mockSearchByEmail;
 	}
 }

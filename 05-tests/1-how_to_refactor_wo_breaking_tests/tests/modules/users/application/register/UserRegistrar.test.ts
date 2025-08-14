@@ -14,13 +14,9 @@ describe("UserRegistrar", () => {
 
 	it("should register user successfully when user does not exist", async () => {
 		repository.shouldSearchByEmailAndReturn("test@example.com", null);
-		repository.shouldSave();
+		repository.shouldSave(new User("123", "test@example.com"));
 
 		await userRegistrar.register("123", "test@example.com");
-
-		expect(repository.getSaveMock()).toHaveBeenCalledWith(
-			new User("123", "test@example.com"),
-		);
 	});
 
 	it("should throw UserAlreadyExistsError when user already exists", async () => {

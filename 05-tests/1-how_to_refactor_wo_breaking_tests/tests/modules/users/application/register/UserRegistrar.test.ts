@@ -8,18 +8,17 @@ describe("UserRegistrar", () => {
 	const repository = new MockUserRepository();
 	const userRegistrar = new UserRegistrar(repository);
 
-	beforeEach(() => {
-		jest.clearAllMocks();
-	});
-
 	it("should register user successfully when user does not exist", async () => {
-		repository.shouldSearchByEmailAndReturn("test@example.com", null);
-		repository.shouldSave(new User("123", "test@example.com"));
+		const user = new User("123", "test@example.com");
 
-		await userRegistrar.register("123", "test@example.com");
+		repository.shouldSearchByEmailAndReturn(user.email, null);
+		repository.shouldSave(user);
+
+		await userRegistrar.register(user.id, user.email);
 	});
 
 	it("should throw UserAlreadyExistsError when user already exists", async () => {
+		const newUserId = "789";
 		const existingUser = new User("456", "existing@example.com");
 
 		repository.shouldSearchByEmailAndReturn(
@@ -28,7 +27,7 @@ describe("UserRegistrar", () => {
 		);
 
 		await expect(
-			userRegistrar.register("789", existingUser.email),
+			userRegistrar.register(newUserId, existingUser.email),
 		).rejects.toThrow(UserAlreadyExistsError);
 	});
 });

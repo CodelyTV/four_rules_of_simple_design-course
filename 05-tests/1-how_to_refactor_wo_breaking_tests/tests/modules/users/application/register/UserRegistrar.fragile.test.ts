@@ -21,11 +21,13 @@ describe("UserRegistrar - FRAGILE TESTS", () => {
 	});
 
 	it("should call ensureUserDoesNotAlreadyExists and save user when registering", async () => {
-		repository.shouldSave(new User("123", "test@example.com"));
+		const user = new User("123", "test@example.com");
 
-		await userRegistrar.register("123", "test@example.com");
+		repository.shouldSave(user);
 
-		expect(ensureUserSpy).toHaveBeenCalledWith("test@example.com");
+		await userRegistrar.register(user.id, user.email);
+
+		expect(ensureUserSpy).toHaveBeenCalledWith(user.email);
 	});
 
 	it("should not save user when ensureUserDoesNotAlreadyExists throws error", async () => {

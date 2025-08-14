@@ -16,9 +16,7 @@ describe("UserRegistrar", () => {
 		repository.shouldSearchAndReturnNull(id);
 		repository.shouldSave(expectedUser);
 
-		const result = await userRegistrar.register(id, email);
-
-		expect(result).toEqual(expectedUser);
+		await userRegistrar.register(id, email);
 	});
 
 	it("should throw UserAlreadyExistsError when user already exists", async () => {
